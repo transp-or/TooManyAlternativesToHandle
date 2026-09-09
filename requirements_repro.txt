@@ -1,0 +1,27 @@
+# Core ML/Bayesian Stack
+numpy==2.3.2
+pandas==2.3.1
+pymc==5.26.1
+pytensor==2.35.1
+arviz==0.22.0
+scipy==1.16.1
+numba==0.62.1
+
+# Data Serialization & I/O
+h5py==3.14.0
+h5netcdf==1.6.3
+xarray==2025.7.1
+xarray-einstats==0.9.1
+
+# Visualization
+matplotlib==3.10.3
+seaborn==0.13.2
+rich==14.1.0
+
+# Project Related
+biogeme==3.3.1
+tqdm==4.67.1
+joblib==1.5.2
+python-dateutil==2.9.0.post0
+pytz==2025.2
+PyYAML==6.0.3

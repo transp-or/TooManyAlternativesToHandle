@@ -1,0 +1,2 @@
+J,N,P,mtm,coverage,mean_interval_width,mean_relative_width,mean_posterior_mse,mae,rmse,mean_rhat,max_rhat,mean_ess_bulk,min_ess_bulk,mean_ess_tail,min_ess_tail,n_parameters,coverage_pct,converged
+100,10000,10,5,1.0,0.36429999999999996,0.39566699732804356,0.017218906,0.03840000000000001,0.05428627819255988,1.0070000000000001,1.01,1224.1,178.0,1246.7,133.0,10,100.0,False

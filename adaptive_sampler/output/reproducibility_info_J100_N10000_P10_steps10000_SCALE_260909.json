@@ -1,0 +1,219 @@
+{
+  "seed_config": {
+    "seed": 42,
+    "sources_set": [
+      "np.random.seed()",
+      "np.random.default_rng()",
+      "random.seed()",
+      "pytensor.floatX configured to float32",
+      "pytensor.optimizer already initialized (skipped)",
+      "environment variables set (TF_DETERMINISTIC_OPS, PYTHONHASHSEED)"
+    ]
+  },
+  "data_validation": {
+    "validation_datetime": "2026-09-09T15:57:44.507266",
+    "checks": {
+      "no_nans": {
+        "alternatives_nans": 0,
+        "observations_nans": 0,
+        "valid": "True"
+      },
+      "no_infs": {
+        "alternatives_infs": 0,
+        "observations_infs": 0,
+        "valid": "True"
+      },
+      "dimensions": {
+        "n_observations": 10000,
+        "j_alternatives": 100,
+        "shape_alternatives": [
+          100,
+          49
+        ],
+        "shape_observations": [
+          10000,
+          13
+        ],
+        "valid": true
+      },
+      "dtypes": {
+        "alternatives": {
+          "restaurant_id": "int64",
+          "x": "float64",
+          "y": "float64",
+          "rating": "float64",
+          "cost": "float64",
+          "cuisine": "object",
+          "c_16": "float64",
+          "c_17": "float64",
+          "c_18": "float64",
+          "c_19": "float64",
+          "c_20": "float64",
+          "c_21": "float64",
+          "c_22": "float64",
+          "c_23": "float64",
+          "c_24": "float64",
+          "c_25": "float64",
+          "c_26": "float64",
+          "c_27": "float64",
+          "c_28": "float64",
+          "c_29": "float64",
+          "c_30": "float64",
+          "c_31": "float64",
+          "c_32": "float64",
+          "c_33": "float64",
+          "c_34": "float64",
+          "c_35": "float64",
+          "d_36": "int64",
+          "d_37": "int64",
+          "d_38": "int64",
+          "d_39": "int64",
+          "d_40": "int64",
+          "d_41": "int64",
+          "d_42": "int64",
+          "d_43": "int64",
+          "d_44": "int64",
+          "d_45": "int64",
+          "d_46": "int64",
+          "d_47": "int64",
+          "d_48": "int64",
+          "d_49": "int64",
+          "d_50": "int64",
+          "Chinese": "bool",
+          "Ethiopian": "bool",
+          "French": "bool",
+          "Indian": "bool",
+          "Japanese": "bool",
+          "Korean": "bool",
+          "Lebanese": "bool",
+          "Mexican": "bool"
+        },
+        "observations": {
+          "individual_id": "int64",
+          "user_x": "float64",
+          "user_y": "float64",
+          "gender": "int64",
+          "age": "float64",
+          "edu_secondary": "int64",
+          "edu_tertiary": "int64",
+          "income_k": "float64",
+          "logincome": "float64",
+          "risk": "float64",
+          "has_children": "int64",
+          "logit_0": "int64",
+          "cuisine": "object"
+        }
+      },
+      "required_columns": {
+        "alternatives_missing": [],
+        "observations_missing": [],
+        "valid": true
+      }
+    },
+    "all_valid": true
+  },
+  "x_full_validation": {
+    "shape": [
+      10000,
+      100,
+      10
+    ],
+    "dtype": "float32",
+    "checks": {
+      "nans": 0,
+      "infs": 0
+    },
+    "all_valid": true,
+    "feature_stats": {
+      "rating": {
+        "min": 1.7653038501739502,
+        "max": 5.0,
+        "mean": 3.944582939147949,
+        "std": 0.7604848146438599,
+        "count": 1000000
+      },
+      "cost": {
+        "min": 10.0,
+        "max": 32.0067138671875,
+        "mean": 20.342817306518555,
+        "std": 4.837033748626709,
+        "count": 1000000
+      },
+      "chinese": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.18000000715255737,
+        "std": 0.3841874301433563,
+        "count": 1000000
+      },
+      "japanese": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.14000000059604645,
+        "std": 0.3469870388507843,
+        "count": 1000000
+      },
+      "korean": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.09000000357627869,
+        "std": 0.2861817479133606,
+        "count": 1000000
+      },
+      "indian": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.10000000149011612,
+        "std": 0.29999998211860657,
+        "count": 1000000
+      },
+      "french": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.14000000059604645,
+        "std": 0.3469870388507843,
+        "count": 1000000
+      },
+      "mexican": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.10999999940395355,
+        "std": 0.3128897249698639,
+        "count": 1000000
+      },
+      "lebanese": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.14000000059604645,
+        "std": 0.3469870388507843,
+        "count": 1000000
+      },
+      "log_dist": {
+        "min": -3.1659083366394043,
+        "max": 4.9068498611450195,
+        "mean": 3.790703773498535,
+        "std": 0.6219464540481567,
+        "count": 1000000
+      }
+    }
+  },
+  "system_info": {
+    "timestamp": "2026-09-09T16:00:16.350995",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python_version": "3.11.16",
+    "python_executable": "/Users/preto/miniforge3/envs/adasampler/bin/python",
+    "hostname": "TRANSPM-C021348",
+    "processor": "arm",
+    "machine": "arm64"
+  },
+  "library_versions": {
+    "numpy": "2.3.2",
+    "pandas": "2.3.1",
+    "pymc": "5.26.1",
+    "pytensor": "2.35.1",
+    "arviz": "0.22.0",
+    "scipy": "1.16.1",
+    "matplotlib": "3.10.3",
+    "numba": "0.62.1"
+  }
+}

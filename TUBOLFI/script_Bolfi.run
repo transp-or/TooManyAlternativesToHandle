@@ -1,0 +1,45 @@
+#!/bin/bash -l
+#SBATCH --chdir /home/preto/likelihood_free/TUBOLFI
+#SBATCH --job-name=bolfi
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=72
+#SBATCH --mem=128GB
+#SBATCH --time=04:00:00
+#SBATCH --account=transpor
+#SBATCH --output=/home/preto/likelihood_free/TUBOLFI/output/slurm-%j.out
+
+# Log a little system / job environment info before running to help diagnose memory usage
+echo "===== PRE-RUN SYSTEM INFO ====="
+echo "Date: $(date -u)"
+echo "SLURM_JOBID: ${SLURM_JOBID:-not-set}"
+echo "SLURM_JOB_NODELIST: ${SLURM_JOB_NODELIST:-not-set}"
+echo "CPUS allocated: ${SLURM_CPUS_ON_NODE:-not-set}"
+echo "Requested memory: ${SLURM_MEM_PER_NODE:-not-set}GB"
+echo "--- free -h ---"
+free -h || true
+echo "--- /proc/meminfo (head) ---"
+head -n 20 /proc/meminfo || true
+echo "--- ulimit -a ---"
+ulimit -a || true
+echo "==============================="
+
+
+
+module load gcc/13.2.0 python/3.11.7
+source /home/preto/venvs/bolfi/bin/activate
+# Set XLA device count for JAX/AOT backends (if used)
+export XLA_FLAGS="--xla_force_host_platform_device_count=${SLURM_CPUS_ON_NODE}"
+
+# IMPORTANT: Using 24 threads as configured in the canonical script
+# This matches the notebook's behavior and fits well within the 72 CPU allocation.
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+
+# Run the script with arguments
+echo "Starting estimation at: $(date)"
+srun /usr/bin/time -v python run_bolfi_canonical_v2.py --J 100 --N 10000 --P 10 --seed 42
+echo "Finished estimation at: $(date)"

@@ -1,0 +1,34 @@
+# TUBOLFI runtime requirements  —  Python 3.11 (built/tested on 3.11.7), CPU only
+#
+#   Full pinned snapshot (all 95 packages, incl. transitive):  requirements-lock.txt  <- use this to reproduce
+#   Recreate the environment (venv or conda; name is arbitrary):
+#     python3.11 -m venv .venv  &&  . .venv/bin/activate      # Windows: .venv\Scripts\activate
+#     pip install -r requirements-lock.txt                    # exact clone
+#     # (this file is a shorter, human-readable subset — the direct third-party
+#     #  imports of run_bolfi_canonical_v2.py / TuRbolfi_GPU.py / mnl_simulators.py)
+
+# --- BO / GP surrogate ---
+torch==2.9.0
+botorch==0.16.0
+gpytorch==1.14.2
+
+# --- numerics / data ---
+numpy==2.3.4
+pandas==2.3.3
+scipy==1.16.3
+scikit-learn==1.7.2
+joblib==1.5.2
+
+# --- MCMC (MCMC_sampling) ---
+pymc==5.26.1
+pytensor==2.35.1
+arviz==0.22.0
+xarray==2025.10.1
+h5netcdf==1.7.3          # backend for arviz InferenceData .to_netcdf()
+
+# --- plotting ---
+matplotlib==3.10.7
+
+# --- notebooks (TuRBOLFI_FullAlt_GPU.ipynb etc.); drop for a headless script-only env ---
+ipykernel==7.1.0
+ipywidgets==8.1.7

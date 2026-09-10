@@ -48,6 +48,9 @@ warnings.filterwarnings("ignore")
 DEVICE = "cpu"
 torch.set_default_dtype(torch.float64)
 
+# Keep the data outside TUBOLFI
+DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "data" / "final_2310"
+
 
 def set_determinism(seed):
     """Seed Python, NumPy and PyTorch, configure CUDA, and request deterministic operations."""
@@ -319,7 +322,7 @@ def train_gp(args, DEVICE):
     Use 5 * P initial samples and a training-point budget of 150 * P.
     """
     base_dir = Path(__file__).parent
-    data_dir = base_dir / "data"
+    data_dir = DATA_DIR
     
     # Dataset identifier (Match filename pattern)
     N_str = f"{args.N // 1000}k"
@@ -533,7 +536,7 @@ def gp_retrive(args, DEVICE, tol_quantile=0.95, gp_iters=None,notes = "max_iters
     all stored targets. Return None if data or checkpoint files are missing.
     """
     base_dir = Path(__file__).parent
-    data_dir = base_dir / "data"
+    data_dir = DATA_DIR
 
     # Dataset identifier (Match filename pattern used by train_gp)
     N_str = f"{args.N // 1000}k"

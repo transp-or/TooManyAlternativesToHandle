@@ -54,7 +54,7 @@ environment's `python` is on `PATH` (shown as `python` throughout).
 
 | block | setting |
 |---|---|
-| **Data** | `data/restaurants_J{J}_P10_N{N}_I0C0M0.csv`, `data/choices_J{J}_P10_N{N}_I0C0M0.csv`; `I=0 C=0 M=0` |
+| **Data** | `../data/data/final_2310/restaurants_J{J}_P10_N{N}_I0C0M0.csv`, `../data/data/final_2310/choices_J{J}_P10_N{N}_I0C0M0.csv`; `I=0 C=0 M=0` |
 | **Discrepancy** | `--dis_type 5+6` (stage 0 = utility-based, stage 1 = attribute-based); `global_sd` calibrated at the stage-0→1 switch (`cholesky(inv(Omega_hat))`) |
 | **Sims / eval** | `--sim_num 30` |
 | **BO / TuRBO** | `--batch_size 2`, `--convergence_type fixed`, `max_iters = 150*P = 1500`, `--system windows` (threaded batch discrepancy eval) |
@@ -191,7 +191,7 @@ first, or call its `python` by full path).
 2. Env (§0): create a Python-3.11 venv/conda env and, on macOS/Linux,
    `python -m pip install -r requirements.txt`. Verify:
    `python -c "import torch, botorch, gpytorch, pymc, arviz; print(torch.__version__)"` → `2.9.0`.
-3. Data present: `data/restaurants_J{J}_P10_N{N}_I0C0M0.csv` and `data/choices_J{J}_...csv` for
+3. Data present: `../data/data/final_2310/restaurants_J{J}_P10_N{N}_I0C0M0.csv` and `../data/data/final_2310/choices_J{J}_...csv` for
    all 9 `(J,N)` in {100,200,500}×{10000,20000,50000}.
 4. Decide the target: **verify existing** `final_result/` (fast) or **regenerate** (slow).
 

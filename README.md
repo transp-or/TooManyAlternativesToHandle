@@ -1,22 +1,23 @@
 # Too Many Alternatives to Handle
 
 This repository contains two approaches for Bayesian estimation of large
-discrete-choice models: an Adaptive Sampler based on sampled choice sets, and
-TurboLFI/BOLFI, a likelihood-free inference approach. Each method has its own
+discrete-choice models: an [Adaptive Sampler](#1-adaptive-sampler) based on sampled choice sets, and
+[TurboLFI/BOLFI](#2-turbolfi--bolfi), a likelihood-free inference approach. Each method has its own
 environment and run instructions below.
 
-## Authors and supervision
+## Authors and Supervision
 
 - Anne-Valérie Preto — [anne-valerie.preto@epfl.ch](mailto:anne-valerie.preto@epfl.ch)
 - Xinwei Li — [xinwei.li@u.nus.edu](mailto:xinwei.li@u.nus.edu)
 
 Supervised by Prof. Michel Bierlaire and Prof. Prateek Bansal.
 
-# Adaptive Sampler
 
-This repository contains a Adaptive Sampler implementation for discrete choice models using PyMC and a custom adaptive alternative sampling step.
+## 1. Adaptive Sampler
 
-## 1. Environment Setup
+This repository contains an Adaptive Sampler implementation for discrete choice models using PyMC and a custom adaptive alternative sampling step.
+
+### 1.1. Environment Setup
 
 To ensure reproducibility (matching the Scitas computation environment), create a Conda environment using the provided requirements:
 
@@ -29,7 +30,7 @@ conda activate adasampler
 pip install -r requirements_repro.txt
 ```
 
-## 2. Data Configuration
+### 1.2. Data Configuration
 
 The sampler expects CSV files following the naming scheme:
 `choices_J{J}_P{P}_N{N/1000}k_I{I}C{C}M{M}.csv` (for example,
@@ -39,7 +40,7 @@ The sampler expects CSV files following the naming scheme:
 - **Change path**: Pass `data_dir` when calling `load_data()` from Python, or add a
   directory to `candidate_dirs` in `adaptive_sampler/data.py`.
 
-## 3. Running the Model
+### 1.3. Running the Model
 
 Run the sampler from the `adaptive_sampler/` directory (this also keeps the log
 and default `output/` directory together):
@@ -65,7 +66,7 @@ python run_model.py \
   --output_suffix "_260603"
 ```
 
-### Parameter Reference
+#### Parameter Reference
 
 | Parameter | Meaning |
 | :--- | :--- |
@@ -83,7 +84,7 @@ python run_model.py \
 | `rescale_trace` | Automatically convert parameters back to original units before saving. |
 | `output_suffix` | String appended to output filenames for versioning. |
 
-## 4. Outputs
+### 1.4. Outputs
 
 Results are saved in the defined `--outdir`:
 - `trace_...nc`: The posterior samples.
@@ -91,14 +92,14 @@ Results are saved in the defined `--outdir`:
 - `scale_params_...json`: Parameters used for feature scaling.
 
 
-# TurboLFI / BOLFI
+## 2. TurboLFI / BOLFI
 
 This directory contains the CPU implementation of TurboLFI/BOLFI for the
 synthetic multinomial-logit experiments.  The entry point is
 `run_bolfi_canonical_v2.py`; there is no `run_bolfi_canonical.py` in this
 repository.
 
-## Environment
+### 2.1 Environment
 
 TurboLFI has its own Python 3.11 environment.  Create it from the repository
 root so that it stays separate from the adaptive-sampler environment:
@@ -125,7 +126,7 @@ python -c "import torch, botorch, gpytorch, pymc, arviz; print(torch.__version__
 python run_bolfi_canonical_v2.py --help
 ```
 
-## Data and outputs
+### 2.2 Data and outputs
 
 For `--J 100 --N 10000 --P 10`, the runner reads these bundled files:
 
@@ -146,7 +147,7 @@ four-chain PyMC MCMC passes (`early_stop` and `iter_max` when convergence is
 configuration.  Use a separate copy of `final_result/` if its checked-in
 results must be retained.
 
-## Run on Slurm
+### 2.3 Run on Slurm
 
 After activating the `turbolfi` environment and changing to `TUBOLFI/`, the
 requested command is:

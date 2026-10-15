@@ -806,7 +806,10 @@ def MCMC_sampling(args, bolfi_estimator, DEVICE,notes=None):
         )
     
     # Save trace summary
-    summary = az.summary(trace)
+    # Persist a 95% HDI summary.  The raw NetCDF trace remains the source of
+    # truth for later metric recreation, but keeping this companion CSV at the
+    # same level prevents accidental reuse of ArviZ's 94% default interval.
+    summary = az.summary(trace, hdi_prob=0.95, round_to=None)
 
     # add true value + whether the HDI (credible interval) covers it
     true_map = {name: float(v) for name, v in gv.REAL_BETA_dict.items()}

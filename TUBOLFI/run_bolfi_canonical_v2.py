@@ -887,22 +887,51 @@ def main(P,J,N):
         args.seed = SA_DATASET_SEEDS.get((args.J, args.N), 42) if canonical_sa else 42
     print(f"Training seed: {args.seed}")
 
+    # step name -> elapsed seconds
+    time_log = {}
+    t_start = time.time()
+
+    def write_time_log(file_route):
+        """Write time_log to time_log.txt in the BOLFI result folder (overwritten after each step)."""
+        with open(os.path.join(file_route, "time_log.txt"), "w") as f:
+            f.write(f"P={args.P}, J={args.J}, N={args.N}, seed={args.seed}\n")
+            f.write(f"simulator={args.simulator_type}, mh_steps={args.mh_steps}, "
+                    f"mh_steps_warm={args.mh_steps_warm}, sa_mtm_m={args.sa_mtm_m}\n")
+            for step, sec in time_log.items():
+                f.write(f"{step:<25s} {sec:12.2f} s  ({sec / 60:8.2f} min)\n")
+            total = time.time() - t_start
+            f.write(f"{'total':<25s} {total:12.2f} s  ({total / 60:8.2f} min)\n")
+
+    t0 = time.time()
     bolfi_estimator = train_gp(args, DEVICE)
+    time_log["train_gp"] = time.time() - t0
     if bolfi_estimator:
+        result_dir = bolfi_estimator.file_route
+        write_time_log(result_dir)
     # estimation with early stop
         early_stop = bolfi_estimator.iter_early_stop if bolfi_estimator else None
-        
-        bolfi_estimator = gp_retrive(args, DEVICE, 
-                                            tol_quantile=0.85, 
+
+        t0 = time.time()
+        bolfi_estimator = gp_retrive(args, DEVICE,
+                                            tol_quantile=0.85,
                                             notes="early_stop")
+        time_log["gp_retrive_early_stop"] = time.time() - t0
+        t0 = time.time()
         MCMC_sampling(args, bolfi_estimator, DEVICE,notes="early_stop")
-                
-        
+        time_log["MCMC_early_stop"] = time.time() - t0
+        write_time_log(result_dir)
+
+
         # estimation when iter_max
         if args.convergence_type == "fixed":
+            t0 = time.time()
             bolfi_estimator = gp_retrive(args, DEVICE, tol_quantile=0.85, notes="iter_max")
+            time_log["gp_retrive_iter_max"] = time.time() - t0
+            t0 = time.time()
             MCMC_sampling(args, bolfi_estimator, DEVICE,notes="iter_max")
-        
+            time_log["MCMC_iter_max"] = time.time() - t0
+            write_time_log(result_dir)
+
 
 
 if __name__ == "__main__":

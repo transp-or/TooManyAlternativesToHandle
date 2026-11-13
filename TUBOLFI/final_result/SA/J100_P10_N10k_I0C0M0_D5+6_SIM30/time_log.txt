@@ -1,0 +1,4 @@
+P=10, J=100, N=10000, seed=42
+simulator=SA, mh_steps=30, mh_steps_warm=20,10, sa_mtm_m=5
+MCMC_iter_early_stop             72.54 s  (    1.21 min)
+total                            72.54 s  (    1.21 min)
